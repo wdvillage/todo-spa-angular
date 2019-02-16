@@ -1,0 +1,115 @@
+  <div *ngIf="editItem; then editBlock; else addBlock"></div>
+
+    <ng-template #addBlock>
+          <mat-card class="add-card">
+      <h3>Add task: </h3>
+      <form [formGroup]="add_form" (submit)="submitAddTask()">
+
+        <mat-form-field>
+          <input matInput formControlName="description" placeholder="Task's description">
+        </mat-form-field>
+
+          <button mat-raised-button class="edit" color="primary">
+              <mat-icon>add</mat-icon>
+          </button>
+        </form>
+
+  </mat-card>
+    </ng-template>
+
+
+    <ng-template #editBlock>
+     <mat-card class="edit-card"> 
+      <h3>Edit task: </h3>
+      <form [formGroup]="edit_form">
+
+        <mat-form-field>
+          <input matInput formControlName="description" placeholder="Task's description">
+        </mat-form-field>
+
+        <button mat-raised-button class="save" color="primary" (click)="submitSaveTask()">
+              <mat-icon>save</mat-icon>
+        </button>
+        <button mat-raised-button class="cansel" color="primary" (click)="canselTask()">
+              <mat-icon>clear</mat-icon>
+        </button>        
+        </form>
+
+   </mat-card>
+    </ng-template>
+
+
+
+
+<div class="cont">
+  <mat-card class="mat-card-container todo-list">
+    <mat-card-title>Todo list:</mat-card-title>
+
+    <mat-card-content>
+
+    
+      <ul
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="currentTasks"
+      [cdkDropListConnectedTo]="[completedList]"
+      class="list cdk-drag-animating mat-elevation-z8"
+      (cdkDropListDropped)="drop($event)"
+      (cdkDropListEntered)="entered($event)"
+      (cdkDropListExited)="exited($event)">
+
+
+        <li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask">
+            <mat-card class="item">
+              <mat-card-content class="content-currentTask">{{i+1+'. ' }}{{currentTask.description}}</mat-card-content>
+            <div class="btn-container clearfix">
+              <button mat-icon-button (click)="editTask(currentTask.id)" class="edit" color="accent">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button (click)="deleteTask(currentTask.id)" class="delete" color="accent">
+                <mat-icon>delete</mat-icon>
+              </button>
+
+            </div>
+
+            </mat-card>
+          </li>
+        </ul>
+
+    </mat-card-content>
+  </mat-card>
+
+
+
+
+
+    <mat-card class="mat-card-container completed-list">
+    <mat-card-title>Completed tasks:</mat-card-title>
+    <mat-card-content>
+
+      <ul
+      cdkDropList
+      #completedList="cdkDropList"
+      [cdkDropListData]="completedTasks"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="list cdk-drag-animating mat-elevation-z8"
+      (cdkDropListDropped)="drop($event)"
+      (cdkDropListEntered)="entered($event)"
+      (cdkDropListExited)="exited($event)">        
+        <li *ngFor="let completedTask of completedTasks; let i=index" cdkDrag>
+              <mat-card class="item">
+                  <mat-card-content class="content-completedTask">{{i+1+'. ' }}{{completedTask.description}}</mat-card-content>
+                <div class="btn-container clearfix">
+                  <button mat-icon-button (click)="deleteTask(completedTask.id)" class="delete" color="accent">
+                    <mat-icon>delete</mat-icon>
+                  </button>        
+                </div>
+
+              </mat-card>
+          </li>
+        </ul>
+
+    </mat-card-content>
+  </mat-card>
+</div>

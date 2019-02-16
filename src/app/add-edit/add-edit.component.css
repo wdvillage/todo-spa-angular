@@ -1,0 +1,31 @@
+ul {
+	    list-style-type: none;
+	    padding: 0;
+      background: #54A636;
+      padding: 20px;
+      min-height: 5px;
+}
+li {
+	margin-bottom: 10px;
+  cursor: move;
+  list-style-type: none;
+}
+.save {
+  margin-right: 5px;
+}  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
