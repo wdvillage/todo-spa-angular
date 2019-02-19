@@ -18,22 +18,30 @@ public task:Task;
   getCurrentTasks() {
      let currentTasks=[];
      this.tasks = JSON.parse(localStorage.getItem('todoSpaAngular'));
+     if (this.tasks!=null || this.tasks!=undefined ) { 
      this.tasks.forEach(function(item, i, tasks) {
       if (item.done===false) {
       currentTasks.push(item);
       }
     });
+   } else {
+     currentTasks=[];
+   }
      return currentTasks;
-  }
+   }
 
   getCompletedTasks() {
     let completedTasks=[];
      this.tasks = JSON.parse(localStorage.getItem('todoSpaAngular'));
+     if (this.tasks!=null || this.tasks!=undefined ) { 
      this.tasks.forEach(function(item, i, tasks) {
       if (item.done===true) {
       completedTasks.push(item);
       }
     });
+   } else {
+     completedTasks=[];
+   }
      return completedTasks;
   }
 

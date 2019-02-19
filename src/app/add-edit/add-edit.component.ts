@@ -12,11 +12,12 @@ import { TaskService } from '../task.service';
 })
 export class AddEditComponent implements OnInit {
 
+title='Todo SPA Angular';
 public editItem=false;
 task:Task;
 tasks:Task[];
-currentTasks:Task[];
-completedTasks:Task[];
+public currentTasks:Task[];
+public completedTasks:Task[];
 editTaskId:any;
 
   public add_form : FormGroup = new FormGroup({
@@ -95,54 +96,66 @@ editTaskId:any;
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
+        console.log('**********************');
+        console.log(event.previousContainer.data);
+        console.log(event.container.data);
+        console.log(event.container.id);
+        console.log(event.item.dropContainer.id);
 
-        let tasksArray=event.container.data;
-        let itemsArr=[];
-        tasksArray.forEach(function(item, i, taskArray) {
-        console.log(item);
-        itemsArr.push(item);
-        //{id:"4422hhf666555", done:false, description:'dddddddddddddd'}
-        /*for(let ii = 0; i < tasks.length; ii++) {
-          if(tasks[ii].id == itemsArr[i].id) {
-            console.log(itemsArr[ii].id);
-              tasks[ii].done=!this.tasks[ii].done;
-          console.log(itemsArr[ii].id);
+        let containerId=event.container.id;
+        let dropContainerId=event.item.dropContainer.id;
+        let tasks=event.container.data;
+
+        let oldTaskArray=[];
+        let newTaskArray=[];
+        tasks.forEach(function(item, i, tasks) {
+          let oldTask:Task;
+          let newTask:Task;
+          let itemDataJson = JSON.stringify(item);
+          console.log(itemDataJson);
+          let itemDataObj = JSON.parse(itemDataJson);
+          console.log(itemDataObj.done);
+          oldTask=itemDataObj;
+          oldTaskArray.push(oldTask);
+          if (containerId==='cdk-drop-list-1' && dropContainerId==='cdk-drop-list-0') {
+            itemDataObj.done=true;
+            newTask=itemDataObj;
+            newTaskArray.push(newTask);
+          } else {
+            itemDataObj.done=false;
+            newTask=itemDataObj;
+            newTaskArray.push(newTask);
           }
-        }*/
 
-    });
-        //console.log(event.previousContainer.data);
-        //console.log(event.container.data);
-        //console.log(event.previousIndex);
-        //console.log(event.currentIndex);
+        });
 
+        for (var i = 0; i < oldTaskArray.length; i++) {
+          this.taskService.updateTask(oldTaskArray[i], newTaskArray[i]);
         }
+         console.log('**********************');   
+      }
     }
 
-  entered(event: CdkDragEnter<string[]>) {
-    console.log('~~~~~~~~~~~~~~~~~~~');
-    console.log('Entered: ', event.container.id);
-    console.log('Entereddata', event.item.data);
-    if (event.container.id !== event.item.dropContainer.id) {
-      console.log('Remove borders');
-       let currentTasks=this.taskService.getCurrentTasks();
-     console.log('Current tasks: ',currentTasks);
-    }
-
- 
-    console.log('~~~~~~~~~~~~~~~~~~~');
-  }
 
   exited(event: CdkDragExit<string[]>) {
-    console.log('¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤');
-    console.log('Exited: ', event.container.id);
-     console.log('Exiteddata', event.item.data);
-    console.log('Card: ', event.item.dropContainer.id);
+  //  console.log('Exited (вышел): ', event.container.id);
+  //   console.log('Exiteddata (вышел)', event.item.data);
+  //  console.log('Card: ', event.item.dropContainer.id);
     if (event.container.id === event.item.dropContainer.id) {
-      console.log('show');
     }
-    console.log('¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤');
+  //    console.log(event.container.data);
   }
+
+ entered(event: CdkDragEnter<string[]>) {
+    console.log('Entered: ', event.container.id);
+
+    if (event.container.id !== event.item.dropContainer.id) {
+    } 
+            console.log(event.container.data);
+             console.log(event.container);
+  }
+
+
 
 
 }

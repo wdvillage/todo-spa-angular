@@ -1,3 +1,14 @@
+<mat-toolbar color="primary">
+    <h1>{{ title }}</h1>
+    <div class="text-container">
+      <div class="header-text">Current Tasks: {{currentTasks.length}}</div>
+      <div class="header-text">Completed Tasks: {{completedTasks.length}}</div>
+    </div>
+
+</mat-toolbar>  
+
+<div class="container">
+
   <div *ngIf="editItem; then editBlock; else addBlock"></div>
 
     <ng-template #addBlock>
@@ -30,7 +41,7 @@
         <button mat-raised-button class="save" color="primary" (click)="submitSaveTask()">
               <mat-icon>save</mat-icon>
         </button>
-        <button mat-raised-button class="cansel" color="primary" (click)="canselTask()">
+        <button mat-raised-button class="cansel" color="primary" (click)="clicked = null;canselTask()">
               <mat-icon>clear</mat-icon>
         </button>        
         </form>
@@ -53,13 +64,14 @@
       #todoList="cdkDropList"
       [cdkDropListData]="currentTasks"
       [cdkDropListConnectedTo]="[completedList]"
-      class="list cdk-drag-animating mat-elevation-z8"
+      class="list cdk-drag-animating"
       (cdkDropListDropped)="drop($event)"
       (cdkDropListEntered)="entered($event)"
       (cdkDropListExited)="exited($event)">
 
-
-        <li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask">
+<!--http://qaru.site/questions/502891/angular2-add-class-to-item-on-click   -->
+        <!--<li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask" [class.active]="clicked === currentTask" (click)="clicked = currentTask">-->
+        <li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask" [ngClass]="{'active': clicked === currentTask}" (click)="clicked = currentTask;">
             <mat-card class="item">
               <mat-card-content class="content-currentTask">{{i+1+'. ' }}{{currentTask.description}}</mat-card-content>
             <div class="btn-container clearfix">
@@ -93,7 +105,7 @@
       #completedList="cdkDropList"
       [cdkDropListData]="completedTasks"
       [cdkDropListConnectedTo]="[todoList]"
-      class="list cdk-drag-animating mat-elevation-z8"
+      class="list cdk-drag-animating"
       (cdkDropListDropped)="drop($event)"
       (cdkDropListEntered)="entered($event)"
       (cdkDropListExited)="exited($event)">        
@@ -112,4 +124,7 @@
 
     </mat-card-content>
   </mat-card>
+</div>
+
+
 </div>
