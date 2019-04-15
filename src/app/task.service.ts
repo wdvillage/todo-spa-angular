@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
+import { TASKS } from './initial-data';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Task } from './task';
 export class TaskService {
 public tasks:Task[];
 public task:Task;
+public TASKS:Task[];
 
   constructor() { }
 
@@ -25,7 +27,13 @@ public task:Task;
       }
     });
    } else {
-     currentTasks=[];
+       TASKS.forEach(function(item, i, tasks) {
+        if (item.done===false) {
+        currentTasks.push(item);
+        }
+      });
+
+     localStorage.setItem('todoSpaAngular', JSON.stringify(TASKS));
    }
      return currentTasks;
    }
@@ -40,7 +48,13 @@ public task:Task;
       }
     });
    } else {
-     completedTasks=[];
+       TASKS.forEach(function(item, i, tasks) {
+        if (item.done===true) {
+        completedTasks.push(item);
+        }
+      });
+
+     localStorage.setItem('todoSpaAngular', JSON.stringify(TASKS));
    }
      return completedTasks;
   }
