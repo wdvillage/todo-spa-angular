@@ -20,7 +20,7 @@
           <input matInput formControlName="description" placeholder="Task's description">
         </mat-form-field>
 
-          <button mat-raised-button class="edit" color="primary">
+          <button mat-raised-button class="edit" color="primary" matTooltip="Add new task">
               <mat-icon>add</mat-icon>
           </button>
         </form>
@@ -38,10 +38,10 @@
           <input matInput formControlName="description" placeholder="Task's description">
         </mat-form-field>
 
-        <button mat-raised-button class="save" color="primary" (click)="submitSaveTask()">
+        <button mat-raised-button class="save" color="primary" (click)="submitSaveTask()" matTooltip="Save task">
               <mat-icon>save</mat-icon>
         </button>
-        <button mat-raised-button class="cansel" color="primary" (click)="clicked = null;canselTask()">
+        <button mat-raised-button class="cansel" color="primary" (click)="clicked = null;canselTask()" matTooltip="Cansel task">
               <mat-icon>clear</mat-icon>
         </button>        
         </form>
@@ -73,13 +73,13 @@
         <!--<li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask" [class.active]="clicked === currentTask" (click)="clicked = currentTask">-->
         <li *ngFor="let currentTask of currentTasks; let i=index" cdkDrag [cdkDragData]="currentTask" [ngClass]="{'active': clicked === currentTask}" (click)="clicked = currentTask;">
             <mat-card class="item">
-              <mat-card-content class="content-currentTask">{{i+1+'. ' }}{{currentTask.description}}</mat-card-content>
+              <mat-card-content class="content-currentTask" matTooltip="Drag task to Completed tasks">{{i+1+'. ' }}{{currentTask.description}}</mat-card-content >
             <div class="btn-container clearfix">
-              <button mat-icon-button (click)="editTask(currentTask.id)" class="edit" color="accent">
+              <button mat-icon-button (click)="editTask(currentTask.id)" class="edit" color="accent" matTooltip="Edit task">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button mat-icon-button (click)="deleteTask(currentTask.id)" class="delete" color="accent">
+              <button mat-icon-button (click)="deleteTask(currentTask.id)" class="delete" color="accent" matTooltip="Delete task">
                 <mat-icon>delete</mat-icon>
               </button>
 
@@ -111,9 +111,9 @@
       (cdkDropListExited)="exited($event)">        
         <li *ngFor="let completedTask of completedTasks; let i=index" cdkDrag>
               <mat-card class="item">
-                  <mat-card-content class="content-completedTask">{{i+1+'. ' }}{{completedTask.description}}</mat-card-content>
+                  <mat-card-content class="content-completedTask" matTooltip="Drag task to Todo list">{{i+1+'. ' }}{{completedTask.description}}</mat-card-content>
                 <div class="btn-container clearfix">
-                  <button mat-icon-button (click)="deleteTask(completedTask.id)" class="delete" color="accent">
+                  <button mat-icon-button (click)="deleteTask(completedTask.id)" class="delete" color="accent" matTooltip="Delete task">
                     <mat-icon>delete</mat-icon>
                   </button>        
                 </div>

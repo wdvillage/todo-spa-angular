@@ -55,7 +55,7 @@ editTaskId:any;
     }
 
     this.taskService.deleteTask(id);
-    console.log(this.tasks);
+    //console.log(this.tasks);
     this.currentTasks=this.taskService.getCurrentTasks();
     this.completedTasks=this.taskService.getCompletedTasks();
   }
@@ -96,11 +96,11 @@ editTaskId:any;
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-        console.log('**********************');
+        /*console.log('**********************');
         console.log(event.previousContainer.data);
         console.log(event.container.data);
         console.log(event.container.id);
-        console.log(event.item.dropContainer.id);
+        console.log(event.item.dropContainer.id);*/
 
         let containerId=event.container.id;
         let dropContainerId=event.item.dropContainer.id;
@@ -132,7 +132,7 @@ editTaskId:any;
         for (var i = 0; i < oldTaskArray.length; i++) {
           this.taskService.updateTask(oldTaskArray[i], newTaskArray[i]);
         }
-         console.log('**********************');   
+         //console.log('**********************');   
       }
     }
 
@@ -154,8 +154,5 @@ editTaskId:any;
             console.log(event.container.data);
              console.log(event.container);
   }
-
-
-
 
 }
