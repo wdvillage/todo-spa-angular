@@ -1,6 +1,6 @@
 # TodoSpaAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+Simple todo list on Angular 7 with Drag&Drop (save data in LocalStorage). You can find demo here:This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
 ## Getting Started
 <ul>
