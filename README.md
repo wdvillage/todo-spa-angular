@@ -2,9 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting Started
+<ul>
+  <li>Clone or download the repo</li>
+  <li>Run npm install</li>
+  <li>Run ng serve</li>
+</ul>
+This will start a development server and your can see the application in action on address:http://localhost:4200
 
 ## Code scaffolding
 
@@ -17,3 +21,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Demo
+
+You can see working project here: <a href="http://todo-spa-angular.wdvillage.se">Todo SPA Angular</a>
+
