@@ -24,5 +24,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Demo
 
-You can see working project here: <a href="http://todo-spa-angular.wdvillage.se">Todo SPA Angular</a>
+You can see working project here: <a href="http://todo-spa-angular.wdvillage.com">Todo SPA Angular</a>
 
